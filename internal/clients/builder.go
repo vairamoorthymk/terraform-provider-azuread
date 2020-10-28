@@ -19,7 +19,7 @@ type ClientBuilder struct {
 
 // Build is a helper method which returns a fully instantiated *AadClient based on the auth Config's current settings.
 func (b *ClientBuilder) Build(ctx context.Context) (*AadClient, error) {
-	env, err := authentication.AzureEnvironmentByNameFromEndpoint(ctx, b.AuthConfig.MetadataURL, b.AuthConfig.Environment)
+	env, err := authentication.AzureEnvironmentByNameFromEndpoint(ctx, b.AuthConfig.MetadataHost, b.AuthConfig.Environment)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,6 @@ func (b *ClientBuilder) Build(ctx context.Context) (*AadClient, error) {
 
 	// client declarations:
 	client := AadClient{
-		SubscriptionID:   b.AuthConfig.SubscriptionID,
 		ClientID:         b.AuthConfig.ClientID,
 		ObjectID:         objectID,
 		TenantID:         b.AuthConfig.TenantID,

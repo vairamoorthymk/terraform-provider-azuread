@@ -146,8 +146,7 @@ func providerConfigure(p *schema.Provider) schema.ConfigureFunc {
 			ClientID:           d.Get("client_id").(string),
 			ClientSecret:       d.Get("client_secret").(string),
 			TenantID:           d.Get("tenant_id").(string),
-			SubscriptionID:     d.Get("tenant_id").(string), // TODO: delete in v1.1
-			MetadataURL:        d.Get("metadata_host").(string),
+			MetadataHost:       d.Get("metadata_host").(string),
 			Environment:        d.Get("environment").(string),
 			MsiEndpoint:        d.Get("msi_endpoint").(string),
 			ClientCertPassword: d.Get("client_certificate_password").(string),
@@ -158,7 +157,7 @@ func providerConfigure(p *schema.Provider) schema.ConfigureFunc {
 			SupportsClientSecretAuth:       true,
 			SupportsManagedServiceIdentity: d.Get("use_msi").(bool),
 			SupportsAzureCliToken:          true,
-			//TenantOnly:                     true, // TODO: enable in v1.1
+			TenantOnly:                     true,
 		}
 
 		config, err := builder.Build()
